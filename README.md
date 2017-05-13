@@ -1,22 +1,29 @@
-# SPORTLABS
-IoT project for sports
+# sportslab
 
-## Web: 
-got to: src/web
-## sensor service
-go to: src/simulation
+> iot for sports
 
-## Database: MONGO
-### Para importar los datos:
-1. Archivos Json se encuentran en el directorio bdd.
-2. Ejecutar lo siguiente: (Asegurarse que se tiene el path correcto, ejemplo:  mongoimport --db databasename --collection collection_name --file PATH/file.json) 
+## About
 
-	* mongoimport --db users --collection localUsers --file localUsers.json
-	* mongoimport --db sportslab --collection team --file team.json
+This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
 
+## Getting Started
 
+Getting up and running is as easy as 1, 2, 3.
 
+1. Make sure you have [NodeJS](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
+2. Install your dependencies
 
+* cd path/to/sportslab/src/web;
+* npm install
 
+3. Run your app
 
+* node app.js
 
+## Visit Web page
+
+* http://localhost:8082
+  
+## Para loguearse en sportslab
+* Username: directivo
+* Password: 123 
