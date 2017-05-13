@@ -1,0 +1,138 @@
+<button type="button" class="btn btn-primary btn-with-icon save-profile" ng-click="OpenModal('add')"><i class="ion-android-checkmark-circle"></i>Agregar</button>
+<div ba-panel ba-panel-title="Lista de jugadores" ba-panel-class="with-scroll">
+<div>
+    <div class="messages">
+        <table>
+			<thead style="color:#fff;">
+				<tr>
+					<th></th>
+				  <th>Jugador</th>
+				  <th>Perfil</th>
+				  <th>Posicióm</th>
+				  <th>Fecha de<br> nacimiento</th>
+				  <th>Número</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="m in listCtrl.messages track by m.id | orderBy:'-date'"
+					class="side-message-navigation-item little-human shineHover">
+					<td class="photo-td" style="width: 60px;">
+					<img ng-src="{{m.name.split(' ')[0] | profilePicture}}" class="little-human-picture">
+					</td>
+					<td ui-sref="stats.mail.detail({id: m.id, label: listCtrl.label})" style="width: 250px;">
+						<div class="additional-info">
+							<div><span class="name">{{m.name}} {{m.lastname}}</span></div>
+							<div><span class="tag label label-primary {{m.tag}}">{{m.tag}}tag</span></div>
+						</div>
+					</td>
+					<td ui-sref="stats.mail.detail({id: m.id, label: listCtrl.label})" style="width: 150px;">
+						<div class="additional-info">
+							<span class="subject"> {{m.perfil1}}</span>
+						</div>
+					</td>
+					<td ui-sref="stats.mail.detail({id: m.id, label: listCtrl.label})" style="width: 150px;">
+						<div class="additional-info">{{m.position1}}</div>
+					</td>
+					<td ui-sref="stats.mail.detail({id: m.id, label: listCtrl.label})" style="width: 100px;">
+						<div class="additional-info">{{m.birthday | date : 'yyyy-MM-d'}}</div>
+					</td>
+					<td ui-sref="stats.mail.detail({id: m.id, label: listCtrl.label})" style="width: 60px;">
+						<div class="additional-info">{{m.number}}</div>
+					</td>
+					<td style="width: 100px;" >
+						<div class="row" style="margin-right: 0px;">
+							<div class="btn-group">
+							  <button type="button" class="btn btn-primary btn-xs">Editar</button>
+							  <button type="button" class="btn btn-danger btn-xs" ng-click='OpenModal("delete","{{m.id}}")'>Quitar</button>
+							</div>
+						</div>
+						<!-- Modal Delete Player-->
+						<div id="deleteModal{{m.id}}" class="modal-c">
+						  <!-- Modal content -->
+						  <div class="modal-content-c" style="">
+							<span class="close-c" ng-click="CloseModal('delete','{{m.id}}')">&times;</span>
+							<h4 class="modal-title" id="myModalLabel">Eliminar jugador: </h4>
+							<p>El jugador {{m.name}} {{m.lastname}} sera eliminado. ¿Desea continuar?</p>
+						  <button type="button" class="btn btn-primary btn-with-icon save-profile" data-toggle="modal" ng-click="DeletePlayer('{{m.id}}')">
+							<i class="ion-android-checkmark-circle"></i>Eliminar
+						  </button>						
+							<div class="modal-footer">
+								<button type="button" class="btn btn-danger close-btn-c" ng-click="CloseModal('delete','{{m.id}}')">Cancelar</button>
+							</div>
+						  </div>
+						</div>
+						<!-- End Modal Delete Player-->
+					</td>
+				</tr>
+			</tbody>
+        </table>
+    </div>
+</div>
+</div>
+<!-- Modal Add Player-->
+<div id="addModal" class="modal-c">
+  <!-- Modal content -->
+  <div class="modal-content-c" style="">
+    <span class="close-c" ng-click="CloseModal('add')">&times;</span>
+	<h4 class="modal-title" id="myModalLabel">Ingresar datos generales: </h4>
+    <form class="form-horizontal">	  
+      <div class="form-group">
+		<label for="inputEmail3" class="col-sm-3 control-label">Nombres:</label>
+		<div class="col-sm-8">	
+        <input ng-model="dataPlayer.name" type="text" class="form-control" placeholder="Nombres" required>
+		</div>
+      </div>
+      <div class="form-group">
+		<label for="inputEmail3" class="col-sm-3 control-label">Apellidos:</label>
+		<div class="col-sm-8">	
+        <input ng-model="dataPlayer.lastname" type="text" class="form-control" placeholder="Apellidos" required>
+		</div>
+      </div>
+      <div class="form-group">
+		<label for="inputEmail3" class="col-sm-3 control-label">Fecha de nacimiento:</label>
+		<div class="col-sm-8">	
+			<label><em>{{dataPlayer.birthday | date:'fullDate' }}</em></label>
+			<p class="input-group">
+			 <input type="text" class="form-control" uib-datepicker-popup="{{format}}" datepicker-options="options" ng-model="dataPlayer.birthday" is-open="opened" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" />
+			  <span class="input-group-btn">
+				<button type="button" class="btn btn-default" ng-click="open()"><i class="glyphicon glyphicon-calendar"></i></button>
+			  </span>
+			</p>
+			<!--<label>Formato: <span class="muted-text">(manual alternate <em>{{altInputFormats[0]}}</em>)</span></label> <select class="form-control" ng-model="format" ng-options="f for f in formats"><option></option></select>-->		
+		</div>
+      </div>
+      <div class="form-group">
+		<label for="inputEmail3" class="col-sm-3 control-label">Estatura:</label>
+		<div class="col-sm-8">
+        <input ng-model="dataPlayer.size" type="number" class="form-control" placeholder="Estatura en metros" required>
+		</div>
+      </div>
+     <div class="form-group">
+		<label for="inputEmail3" class="col-sm-3 control-label" style="">Número de camiseta:</label>
+		<div class="col-sm-8">
+        <input ng-model="dataPlayer.number" type="number" class="form-control" placeholder="Número de camiseta" required>
+		</div>
+      </div>
+      <div class="form-group">
+		<label for="inputEmail3" class="col-sm-3 control-label">Posición principal:</label>
+		<div class="col-sm-8">
+        <input ng-model="dataPlayer.position1" type="text" class="form-control" placeholder="Posición principal" required>
+		</div>
+      </div>
+      <div class="form-group">
+		<label for="inputEmail3" class="col-sm-3 control-label">Perfil principal:</label>
+		<div class="col-sm-8">
+        <input ng-model="dataPlayer.perfil1" type="text" class="form-control" placeholder="Perfil principal" required>
+		</div>
+      </div>
+      <button type="button" class="btn btn-primary btn-with-icon save-profile" data-toggle="modal" ng-click="SendDataPlayer()">
+        <i class="ion-android-checkmark-circle"></i>Agregar
+      </button>
+    </form>
+     <span style="color:#fff">{{ PostDataResponse }}</span>
+	   <div class="modal-footer">
+			<button type="button" class="btn btn-danger close-btn-c" ng-click="CloseModal('add')">Cerrar</button>
+	   </div>
+  </div>
+</div>
+<!-- End Modal Add Player-->

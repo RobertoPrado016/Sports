@@ -1,0 +1,13 @@
+<!--<div class="row">
+    <div class="col-md-12" ba-panel ba-panel-title="App Connection" ba-panel-class="with-scroll">
+        <div ng-include="'/admin/app/pages/analytics/modals/notifications/notifications_handy.html'"></div>
+    </div>
+</div>-->
+
+<trainning-calendar id="calendar_trainning"></trainning-calendar>
+
+<script>
+var loadPlayers=function(date,id){
+angular.element(document.getElementById('calendar_trainning')).scope().loadPlayers(date,id);
+}
+</script>

@@ -1,0 +1,401 @@
+h1, h2, h3, h4, h5, h6, .chart, .description, .panel-title, .text-block, .fc-day-number{
+	color: #ffffff!important;
+}
+.profile-page .form-group label {
+	color:white!important;
+}
+.userpic a.change-userpic {
+	color:white!important;
+}
+.userpic, .userpic .userpic-wrapper {
+	width: 100%!important;
+	height: 350px!important;
+}
+a.sn-link.connected span {
+    color: #fff!important;
+}
+a.sn-link span {
+    color: #fff!important;
+}
+.panel .panel-body h3.with-line {
+    margin-bottom: 0px!important;
+    margin-top: 0!important;
+}
+h3.with-line {
+    padding-top: 0px!important;
+    margin-bottom: 14px!important;
+}
+.little-human .name {
+    font-size: 14px;
+    vertical-align: super;
+    white-space: nowrap;
+	color: #fff;
+}
+.little-human .subject {
+    margin: 0!important;
+}
+.additional-info {
+	color: #fff;
+}
+.blur-theme .nav.nav-tabs > li.active > a {
+    color: #fff!important;
+}
+.blur-theme .nav.nav-tabs a {
+    color: #fff!important;
+}
+button.btn.btn-default {
+    border-width: 1px;
+    color: #fff!important;
+    background: transparent;
+    border-color: #fff;
+}
+.back-button {
+    margin-left: 15px!important;
+	margin-bottom: 15px!important;
+}
+.contact-info.position-address .position, .tab-content {
+     color: #fff!important;
+}
+.person-info .human-picture {
+    margin-top: 0px!important;
+}
+.panel {
+    color: #fff!important;
+    background-color: transparent!important;
+    border: none;
+    border-radius: 5px;
+    position: relative;
+    margin-bottom: 24px;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.25);
+}
+.panel > .panel-heading {
+    color: #fff!important;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+div.blurCalendar {
+    height: 150px;
+}
+.calendar-panel{
+	height: 525px!important;
+}
+.alert strong{
+    font-size: 15px;
+    font-weight: 300!important;
+}
+.alert{
+	margin-bottom: 3px!important;
+}
+.dot-img{
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background-color: red;
+  border-radius: 7px;
+}
+.modal-content {
+	background-color: rgba(164,164,164,0.5)!important;
+}
+.modal .modal-dialog .form-control {
+    color: #fff!important;
+}
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #fff!important;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #fff!important;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #fff!important;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #fff!important;
+}
+.form-control {
+    background-color: rgba(164,164,164,0.5)!important;
+}
+/*MARCADOR*/
+.vc_next_match{
+    position: relative;
+    margin: 0 0 30px;
+}
+
+.vc_next_match .title{
+    padding: 17px 10px;
+    background: #002d6a;
+    text-align: center;
+    margin: 0 0 10px;
+	margin-bottom: 5px;
+}
+
+.vc_next_match .title h4{
+    color:#fff;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.vc_next_match .countdown{
+    text-align: center;
+    width: 100%;
+    margin: 0 0 13px !important;
+}
+
+.vc_next_match .countdown span{
+    width: 23%;
+    display: block;
+    float: left;
+    min-width: inherit;
+    margin-left: 2.66%;
+    margin-right: 0;
+	margin-bottom: 5px;
+	
+}
+
+.vc_next_match .countdown span:first-child{
+    margin-left: 0;
+}
+
+.vc_next_match .commands{
+    background: #252b32;
+    padding: 15px 10px 12px;
+    border-bottom: 3px solid #002d6a;
+    text-align: center;
+    color:#fff;
+    white-space: nowrap;
+    display: table;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.vc_next_match .command{
+    display: table-cell;
+    vertical-align: middle;
+    padding: 15px 0 12px;
+    width: 40%;
+}
+
+.vc_next_match .command .logo img{
+    max-height: 50px;
+    width: auto;
+}
+
+.vc_next_match .command .logo{
+    margin: 0 0 10px;
+}
+
+.vc_next_match .command_vs{
+    display: table-cell;
+    vertical-align: middle;
+    font-family: Oswald;
+    font-size: 30px;
+    text-transform: uppercase;
+    margin: 0 20px;
+    width: 20%;
+}
+
+.vc_next_match .command_vs span{
+    line-height: 34px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.vc_next_match .command h5{
+    margin: 0;
+    color:#fff;
+    text-transform: uppercase;
+    font-weight: normal;
+    line-height: 20px;
+}
+
+.vc_next_match .command h5 a{
+    color:#fff;
+}
+
+.vc_next_match .command h5 a:hover{
+    text-decoration: none;
+    color:#c4302b;
+}
+
+.vc_next_match .match_info{
+    background: #394149;
+    color:#fff;
+    text-align: center;
+    font-size: 13px;
+    line-height: 22px;
+    padding: 14px 10px;
+    margin: 0 0 30px;
+}
+
+@media (max-width: 992px) {
+    .vc_next_match .command .logo img{
+        max-height: 30px;
+        width: auto;
+    }
+
+    .vc_next_match .command_vs{
+        font-size: 15px;
+    }
+
+    .vc_next_match .command h5{
+        font-size: 13px;
+    }
+
+    .vc_next_match .command_vs span{
+        line-height: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .vc_next_match .command .logo img{
+        max-height: 50px;
+        width: auto;
+    }
+
+    .vc_next_match .command_vs{
+        font-size: 30px;
+    }
+
+    .vc_next_match .command h5{
+        font-size: 15px;
+    }
+
+    .vc_next_match .command_vs span{
+        line-height: 34px;
+    }
+}
+/**/
+.countdown{
+    position: relative;
+}
+
+.countdown span{
+    padding: 7px 10px 0;
+    min-width: 65px;
+    height: 84px;
+    border-bottom: 3px solid #002d6a;
+    font-size: 30px;
+    color:#fff;
+    font-family: Oswald;
+    line-height: 50px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    background: rgba(53, 62, 70, 0.9);
+    margin: 0 5px;
+    font-weight: normal;
+}
+
+.countdown span small{
+    font-size: 13px;
+    line-height: 13px;
+    display: block;
+}
+
+/*END MARCADOR*/
+/*CUSTOM MODAL*/
+/* The Modal (background) */
+.modal-c {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content-c {
+    background-color:rgba(164,164,164,0.5);
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 500px;
+	border-radius: 7px;
+	font-family: "Roboto", sans-serif;
+}
+.modal-content-c input, .modal-content-c input:focus{
+    background-color:rgba(164,164,164,0.5);
+	color: #fff;
+}
+.modal-content-c h4{
+	margin-bottom: 25px;
+}
+
+/* The Close Button */
+.close-c {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-c:hover,
+.close-c:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.form-group label {
+    color: #fff!important;
+}
+/* For width 400px and larger: */
+@media only screen and (max-width: 560px) {
+	.modal-content-c {
+		width: 300px;
+	}
+}
+/*Date picker*/
+.uib-datepicker-popup button.btn {
+    color: #313131!important;
+}
+.uib-datepicker-popup button.btn .text-muted {
+    color: gray!important;
+}
+.traffic-text span {
+    display: block;
+    font-size: 18px;
+    color: #fff!important;
+}
+.tab-content .tab-pane p {
+    color: #fff!important;
+}
+//*Calendar*/
+.cal-week-box, {
+    border-radius: 7px;
+}
+
+a.cal-event-week {
+    color: #151515;
+	font-family: "Roboto", sans-serif;
+}
+.cal-row-head [class*="cal-cell"]:first-child, .cal-row-head [class*="cal-cell"] {
+    font-weight: normal!important;
+    padding: 0!important;
+}
+.cal-day-today {
+    background-color: #0489B1!important;
+}
+.cal-day-weekend span[data-cal-date] {
+    color: #fff!important;
+}
+.cal-row-head [class*="cal-cell"]:hover {
+background-color: #149285!important;
+}
+.cal-row-fluid:hover {
+    background-color: transparent!important;
+}
+.cal-cell1, .cal-week-box{
+    border-radius: 7px!important;
+}
+.cal-cell1{
+    border-radius: 7px!important;
+     text-align: center!important;
+}

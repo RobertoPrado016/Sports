@@ -1,0 +1,45 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+      <em class="ion-ios-close-empty sn-link-close"></em>
+    </button>
+    <h4 class="modal-title" id="myModalLabel">Actualizar Información: </h4>
+  </div>
+  <div class="modal-body">
+      
+    <form>
+      <div class="form-group">
+        <input ng-model="dataPlayer.name" type="text" class="form-control" placeholder="Nombres" required>
+      </div>
+      <div class="form-group">
+        <input ng-model="dataPlayer.lastname" type="text" class="form-control" placeholder="Apellidos" required>
+      </div>
+      <div class="form-group">
+        <input ng-model="dataPlayer.birthdate" type="text" class="form-control" placeholder="Fecha de nacimiento" required>
+      </div>
+      <div class="form-group">
+        <input ng-model="dataPlayer.birthplace" type="text" class="form-control" placeholder="Lugar de nacimiento" required>
+      </div>
+      <div class="form-group">
+        <input ng-model="dataPlayer.size" type="number" class="form-control" placeholder="Estatura" required>
+      </div>
+     <div class="form-group">
+        <input ng-model="dataPlayer.number" type="number" class="form-control" placeholder="Número de camiseta" required>
+      </div>
+      <div class="form-group">
+        <input ng-model="dataPlayer.position1" type="number" class="form-control" placeholder="Posición principal" required>
+      </div>
+      <div class="form-group">
+        <input ng-model="dataPlayer.perfil1" type="number" class="form-control" placeholder="Perfil principal" required>
+      </div>
+        <button type="button" class="btn btn-primary btn-with-icon save-profile" data-toggle="modal" ng-click="SendDataPlayer()">
+            <i class="ion-android-checkmark-circle"></i>Actualizar datos
+        </button>
+    </form>
+     <span style="color:#fff">{{ PostDataResponse }}</span>
+  </div>
+  <hr>
+  <div class="modal-footer">
+      <span><button type="button" class="btn btn-danger">Cerrar</button></span>
+  </div>
+</div>

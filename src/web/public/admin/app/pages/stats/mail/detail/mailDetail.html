@@ -1,0 +1,550 @@
+<div class="row">
+        <div class="toggle-navigation-container detail-page">
+            <a href class="collapse-navigation-link ion-navicon" ng-click="tabCtrl.navigationCollapsed=!tabCtrl.navigationCollapsed"></a>
+        </div>
+        <button ui-sref="stats.mail.label({label : detailCtrl.label})" type="button"
+            class="back-button btn btn-default btn-with-icon"><i
+            class="ion-chevron-left"></i>Regresar
+            </button>
+</div>
+<div class="row" ba-panel>
+	<div style="margin-bottom:10px;">
+		<div class="btn-group" style="float:right; background-color:trasparent;">
+		<button class="btn btn-primary" data-calendar-nav="prev"><<</button>
+		<button class="btn" data-calendar-nav="today" style="background-color:rgba(8,138,104,0.5);">Hoy</button>
+		<button class="btn btn-primary" data-calendar-nav="next">>></button>
+		</div>
+		<div class="page-header-h3" style="float:left;"></div>
+	</div>
+	<div id="calendar_player" style="margin-top:40px;"></div>
+	<div class="row" style="margin-top:10px;">
+		<div class="col-sm-4" style=""></div>
+		<div class="col-sm-4" style="text-align: center; ">
+			<button type="button" class="btn btn-primary" ng-click="OpenModal('update5')">
+				<i class="ion-android-checkmark-circle"> Nuevo</i>
+			</button> 		
+		</div>
+		<div class="col-sm-4" style=""></div>
+	</div>
+<script type="text/javascript">
+var change=function(){
+	var eventos=[];
+	eventos=angular.element(document.getElementById('calendar_player')).scope().$parent.events;
+	if(typeof(eventos) != 'undefined')createCalendar("#calendar_player",eventos);
+};
+</script>
+</div>	
+<div class="modal fade" id="events-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>ENTRENAMIENTO:</h3>
+            </div>
+            <div class="modal-body" style="height: 100px; background:#fff; color:red!important;">
+            </div>
+            <div class="modal-footer">
+                <a href="#" data-dismiss="modal" class="btn">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
+<uib-tabset>
+   <uib-tab heading="Entrenamientos">
+   <script> setTimeout('initMap(18)', 500);</script>
+    <div class="row">	
+		<div class="col-sm-6 col-lg-6 col-xs-12" style="margin-top: 15px;" ba-panel ba-panel-title="Desplazamiento" ba-panel-class="with-scroll">
+			<div class="panel-body">
+				<div class="container-img" id="fieldIMG" style="position: relative">
+					<img src="admin/assets/img/app/soccer_field.png" style="width: 100%; height:395px;"/>
+				</div>
+			</div>
+        </div>
+		<div class="col-sm-6 col-lg-6 col-xs-12" style="margin-top: 15px;" ba-panel ba-panel-title="Mapa de calor" ba-panel-class="with-scroll">
+			<div class="panel-body">
+				<div id="gmap_moves" class="gmaps_md" style="height:395px;"></div>
+				
+			</div>
+        </div>	
+	</div>
+	
+    <div class="row">
+	   <div class="col-md-12" ba-panel ba-panel-title="Características del volumen de trabajo" ba-panel-class="with-scroll">
+			<div class="row" style="padding-top: 20px;">
+				<div class="col-md-2 col-md-offset-1" align="center">
+					<div class="alert bg-primary"><strong id="caminaNum"></strong>m</div>
+					<p style="color: #fff">Caminar</p>
+				</div>
+				<div class="col-md-2" align="center">
+					<div class="alert bg-danger"><strong id="trotaNum"></strong>m</div>
+					<p style="color: #fff">Trotar</p>
+				</div>
+				<div class="col-md-2" align="center">
+					<div class="alert bg-warning"><strong id="correNum"></strong>m</div>
+					<p style="color: #fff">Correr</p>
+				</div>
+				<div class="col-md-2" align="center">
+					<div class="alert bg-success"><strong id="picaNum"></strong>m</div>
+					<p style="color: #fff">Sprints</p>
+				</div>
+				<div class="col-md-2" align="center" style="top: -16px;">
+					<div style="background: #FFBF00; height: 85px; width:85px; border-radius: 40px; text-align: center; padding: 35px 5px;font-size: 14px;ont-weight: 300;" >
+						<strong id="totalNum"></strong>m
+					</div>
+					<p style="color: #fff">Total</p>
+				</div>
+			</div>
+			<div class="row">
+			   <div class="col-md-1"></div>
+				<div class="col-md-4" ng-controller="DataChartCtrl">
+					<div class="channels-block" ng-class="{'transparent': transparent}">
+						<div class="channels-block" ng-class="{'transparent': transparent}">
+						  <div class="chart-bg"></div>
+						  <div class="traffic-chart" id="trafficChart">
+							<div class="canvas-holder">
+							  <canvas id="doughnut" class="chart chart-doughnut"
+								  chart-data="percentMet" chart-labels="doughnutData.labels" width="280" height="280" style="z-index: 900;">
+								</canvas>
+							  <div class="traffic-text">
+								<span id="dataTotalMet"></span>
+								<span>Total</span>
+							  </div>
+							</div>
+						  </div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-1"></div>
+				<div class="col-md-4" ng-controller="DataChartCtrl" style="padding: 0 0px;"> 
+					<div class="channels-info-item" ng-repeat="label in doughnutData.labels"
+						 ng-init="i = $index; dataL = percentMet">
+						<div class="legend-color" style="background-color: {{::doughnutData.datasets[0].backgroundColor[i]}}"></div>
+						<p>{{::label}}<span class="channel-number" id="per_{{i}}">+{{dataL[i]}}%</span></p>
+						<div class="progress progress-sm channel-progress">
+							<div class="progress-bar " role="progressbar"
+								 aria-valuenow="{{data.percentage[i]}}" aria-valuemin="0" aria-valuemax="100"
+								 style="width: {{item.percentage}}%">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-1"></div>
+			</div>			
+		</div>
+	</div>
+	<div class="row">
+	<div class="col-md-12" ba-panel ba-panel-title="Métricas del volumen de trabajo" ba-panel-class="with-scroll" >
+		<div class="row" style="padding-top: 20px;">
+			<div class="col-md-6" align="center" >
+				<div class="alert bg-primary" style="margin: 0 150px;"><strong id="velocidadMax"></strong> m/s</div>
+				<p style="color: #fff">Velocidad Máxima</p>
+			</div>
+			<div class="col-md-6" align="center">
+				<div class="alert bg-danger" style="margin: 0 150px;"><strong id="distanciaRelativa"></strong>m</div>
+				<p style="color: #fff">Distancia Relativa</p>
+			</div>
+			<div class="col-md-6" align="center">
+				<div class="alert bg-warning" style="margin: 0 150px;"><strong id="numeroSprints"></strong></div>
+				<p style="color: #fff">Número de Sprints</p>
+			</div>
+			<div class="col-md-6" align="center">
+				<div class="alert bg-success" style="margin: 0 150px;"><strong id="hmld"></strong>m</div>
+				<p style="color: #fff">HMLD</p>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-12 col-md-12"
+			 ba-panel
+			 ba-panel-title="Velocidad vs Tiempo"
+			 ba-panel-class="with-scroll">
+		  <div class="panel-body" ng-include="'admin/app/pages/stats/mail/detail/amCharts/areaChart/areaChart.html'"></div>
+		</div>	
+		<div class="col-lg-12 col-md-12"
+			 ba-panel
+			 ba-panel-title="Aceleración vs Tiempo"
+			 ba-panel-class="with-scroll">
+		  <div class="panel-body" ng-include="'admin/app/pages/stats/mail/detail/amCharts/areaChart/areaChart2.html'"></div>
+		</div>
+	</div>	
+	<div class="col-lg-12 col-md-12"
+		 ba-panel
+		 ba-panel-title="Zonas aceleración"
+		 ba-panel-class="with-scroll">
+	  <div class="panel-body" ng-include="'admin/app/pages/stats/mail/detail/amCharts/barChart/barChart.html'"></div>
+	  <div align="center">Zonas</div>
+	</div>
+  </uib-tab> 
+  <uib-tab heading="Información">
+		<div class="contaiter-fluid" ba-panel>
+            <div class="person-info row">
+                <div class="col-lg-2 col-md-2  col-xs-12 no-padding">
+                    <img ng-src="{{detailCtrl.mail.name.split(' ')[0] | profilePicture}}" class="human-picture">
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-12 no-padding">
+                    <div class="name">
+                        <h2 class="name-h">{{detailCtrl.mail.name}}</h2><br>
+                        <h2 class="name-h second-name">{{detailCtrl.mail.lastname}}</h2>
+                    </div>
+                </div>
+				<div class="col-lg-6 col-md-6 col-xs-12 no-padding" style="position:relative; height:100%;">
+					<button style="float: right;" type="button" class="btn btn-primary btn-with-icon save-profile" ng-click="OpenModal('update1')">
+						<i class="ion-android-checkmark-circle"></i>Actualizar
+					</button> 
+                </div>			
+            </div>
+			<hr>
+			<div class="person-info row">
+				<div class="col-lg-10 col-md-10 col-xs-12 no-padding">
+					<div class="phone-email" style="font-size: 19px; font-weight: 300; vertical-align: super;">
+						<div class="row" style="margin-top: 0px;">
+							<div class="col-sm-6 no-padding" style="margin-top: 20px;">
+								<div class="col-sm-4"><span class="phone">Fecha de nacimiento:</span></div>
+								<div class="col-sm-8" align="left"><span class="phone">{{detailCtrl.mail.birthday | date : 'yyyy-MM-d'}}</span></div>
+							</div>
+							<div class="col-sm-6 no-padding" style="margin-top: 20px;">
+								<div class="col-sm-4"><span class="phone">Edad:</span></div>
+								<div class="col-sm-8" align="left"><span class="phone">{{detailCtrl.mail.age}} años</span></div>
+							</div>
+						</div>
+						<div class="row" style="margin-top: 0px;">
+							<div class="col-sm-6 no-padding" style="margin-top: 20px;">
+								<div class="col-sm-4"><span class="phone">Lugar de nacimiento:</span></div>
+								<div class="col-sm-8" align="left"><span class="phone">{{detailCtrl.mail.birthplace}}</span></div>
+							</div>
+							<div class="col-sm-6 no-padding" style="margin-top: 20px;">
+								<div class="col-sm-4"><span class="phone">Estatura:</span></div>
+								<div class="col-sm-8" align="left"><span class="phone">{{detailCtrl.mail.size}}</span></div>
+							</div>
+						</div>	
+                    </div>
+                </div>
+				<div class="col-lg-2 col-md-2 col-xs-12 no-padding" style="position:relative; height:100%;">
+					<button style="float: right;" type="button" class="btn btn-primary btn-with-icon save-profile" ng-click="OpenModal('update2')">
+						<i class="ion-android-checkmark-circle"></i>Actualizar
+					</button> 
+                </div>				
+            </div>
+			<hr>
+			 <div class="person-info row">
+				<div class="col-lg-10 col-md-10  col-xs-12 no-padding">
+					<div class="phone-email" style="font-size: 19px; font-weight: 300; vertical-align: super;">
+						<div class="row" style="margin-top: 0px;">
+							<div class="col-sm-2"><span class="phone">Número de Camiseta:</span></div>
+							<div class="col-sm-10" align="left"><span class="phone">{{detailCtrl.mail.number}}</span></div>
+						</div>
+						<div class="row" style="margin-top: 0px;">
+							<div class="col-sm-6 no-padding" style="margin-top: 20px;">
+								<div class="col-sm-4"><span class="phone">Posición:</span></div>
+								<div class="col-sm-8" align="left"><span class="phone">{{detailCtrl.mail.position1}}</span></div>
+							</div>
+							<div class="col-sm-6 no-padding" style="margin-top: 20px;">
+								<div class="col-sm-4"><span class="phone">Perfil principal:</span></div>
+								<div class="col-sm-8" align="left"><span class="phone">{{detailCtrl.mail.perfil1}}</span></div>
+							</div>
+						</div>
+						<div class="row" style="margin-top: 0px;">
+							<div class="col-sm-6 no-padding" style="margin-top: 20px;">
+								<div class="col-sm-4"><span class="phone">Posición secundaria:</span></div>
+								<div class="col-sm-8" align="left"><span class="phone">{{detailCtrl.mail.position2}}</span></div>
+							</div>
+							<div class="col-sm-6 no-padding" style="margin-top: 20px;">
+								<div class="col-sm-4"><span class="phone">Perfil secundario:</span></div>
+								<div class="col-sm-8" align="left"><span class="phone">{{detailCtrl.mail.perfil2}}</span></div>
+							</div>
+						</div>						
+					</div>	
+                </div>  
+				<div class="col-lg-2 col-md-2 col-xs-12 no-padding" style="position:relative; height:100%;">
+					<button style="float: right;" type="button" class="btn btn-primary btn-with-icon save-profile" ng-click="OpenModal('update3')">
+						<i class="ion-android-checkmark-circle"></i>Actualizar
+					</button> 
+                </div>				
+            </div>
+			<hr>
+			<div class="person-info row">
+				<div class="col-lg-10 col-md-10 col-xs-12 no-padding">
+                    <div class="phone-email" style="font-size: 19px; font-weight: 300; vertical-align: super;">
+						<div class="row" style="margin-top: 0px;">
+							<div class="col-sm-6 no-padding" style="margin-top: 20px;">
+								<div class="col-sm-4"><span class="phone">Equipo anterior:</span></div>
+								<div class="col-sm-8" align="left"><span class="phone">{{detailCtrl.mail.lastteam}}</span></div>
+							</div>
+							<div class="col-sm-6 no-padding" style="margin-top: 20px;">
+								<div class="col-sm-4"><span class="phone">Agente:</span></div>
+								<div class="col-sm-8" align="left"><span class="phone">{{detailCtrl.mail.agent}}</span></div>
+							</div>
+						</div>
+						<div class="row" style="margin-top: 0px;">
+							<div class="col-sm-6 no-padding" style="margin-top: 20px;">
+								<div class="col-sm-4"><span class="phone">Fichaje:</span></div>
+								<div class="col-sm-8" align="left"><span class="phone">{{detailCtrl.mail.signin | date : 'yyyy-MM-d'}}</span></div>
+							</div>
+							<div class="col-sm-6 no-padding" style="margin-top: 20px;">
+								<div class="col-sm-4"><span class="phone">Expiración de contrato:</span></div>
+								<div class="col-sm-8" align="left"><span class="phone">{{detailCtrl.mail.expiration | date : 'yyyy-MM-d'}}</span></div>
+							</div>
+						</div>																											
+                    </div>
+                </div>
+				<div class="col-lg-2 col-md-2 col-xs-12 no-padding" style="position:relative; height:100%;">
+					<button style="float: right;" type="button" class="btn btn-primary btn-with-icon save-profile" ng-click="OpenModal('update4')">
+						<i class="ion-android-checkmark-circle"></i>Actualizar
+					</button> 
+                </div>				
+			</div>	
+		<hr>			
+		</div>
+  </uib-tab>
+</uib-tabset>
+<div class="row">
+	<div class="toggle-navigation-container detail-page">
+		<a href class="collapse-navigation-link ion-navicon" ng-click="tabCtrl.navigationCollapsed=!tabCtrl.navigationCollapsed"></a>
+	</div>
+	<button ui-sref="stats.mail.label({label : detailCtrl.label})" type="button"
+	class="back-button btn btn-default btn-with-icon">
+		<i class="ion-chevron-left"></i>Regresar
+    </button>
+</div>
+
+
+
+
+<!-- Modal 1 Update Player-->
+<div id="updateModal1" class="modal-c">
+  <!-- Modal content -->
+  <div class="modal-content-c" style="">
+    <span class="close-c" ng-click="CloseModal('update1')">&times;</span>
+	<h4 class="modal-title">Actualización de datos: </h4>
+    <form class="form-horizontal">
+      <div class="form-group">
+		<label for="inputEmail3" class="col-sm-3 control-label">Nombres:</label>
+		<div class="col-sm-9">		
+        <input ng-model="detailCtrl.mail.name" type="text" class="form-control" placeholder="Nombres" value="{{detailCtrl.mail.name}}" required>
+		</div>
+	  </div>
+      <div class="form-group">
+		<label for="inputEmail3" class="col-sm-3 control-label">Apellidos:</label>
+		<div class="col-sm-9">	
+        <input ng-model="detailCtrl.mail.lastname" type="text" class="form-control" placeholder="Apellidos" value="{{detailCtrl.mail.name}}" required>
+		</div>
+	  </div>	  
+      <button type="button" class="btn btn-primary btn-with-icon save-profile" data-toggle="modal" ng-click="UpdateDataPlayer(detailCtrl.mail)">
+        <i class="ion-android-checkmark-circle"></i>Actualizar
+      </button>
+    </form>
+     <span style="color:#fff">{{ PostDataResponse }}</span>
+	   <div class="modal-footer">
+			<button type="button" class="btn btn-danger close-btn-c" ng-click="CloseModal('update1')">Cerrar</button>
+	   </div>
+  </div>
+</div>
+<!-- End Modal 1 Update Player-->
+<!-- Modal 2 Update Player-->
+<div id="updateModal2" class="modal-c">
+  <!-- Modal content -->
+  <div class="modal-content-c" style="">
+    <span class="close-c" ng-click="CloseModal('update2')">&times;</span>
+	<h4 class="modal-title">Actualización de datos: </h4>
+    <form class="form-horizontal">
+      <div class="form-group">
+		<label for="inputEmail3" class="col-sm-3 control-label">Fecha de nacimiento:</label>
+		<div class="col-sm-8">	
+			<label><em>{{detailCtrl.mail.birthday | date:'fullDate' }}</em></label>
+			<p class="input-group">
+			 <input type="text" class="form-control" uib-datepicker-popup="{{format}}" datepicker-options="options" ng-model="detailCtrl.mail.birthday" value="{{detailCtrl.mail.birthday | date : 'yyyy/MM/dd'}}" is-open="opened" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" />
+			  <span class="input-group-btn">
+				<button type="button" class="btn btn-default" ng-click="open()"><i class="glyphicon glyphicon-calendar"></i></button>
+			  </span>
+			</p>
+			<!--<label>Formato: <span class="muted-text">(manual alternate <em>{{altInputFormats[0]}}</em>)</span></label> <select class="form-control" ng-model="format" ng-options="f for f in formats"><option></option></select>-->		
+		</div>
+	  </div>
+      <div class="form-group">
+		<label for="inputEmail3" class="col-sm-3 control-label">Lugar de nacimiento:</label>
+		<div class="col-sm-8">	
+        <input ng-model="detailCtrl.mail.birthplace" type="text" class="form-control" placeholder="Lugar de nacimiento" value="{{detailCtrl.mail.birthplace}}" required>
+		</div>
+	  </div>
+      <div class="form-group">
+		<label for="inputEmail3" class="col-sm-3 control-label">Estatura: (m)</label>
+		<div class="col-sm-8">	
+        <input ng-model="detailCtrl.mail.size" type="number" class="form-control" placeholder="Estatura en metros" value="{{detailCtrl.mail.size}}" required>
+		</div>
+	  </div>  
+      <button type="button" class="btn btn-primary btn-with-icon save-profile" data-toggle="modal" ng-click="UpdateDataPlayer(detailCtrl.mail)">
+        <i class="ion-android-checkmark-circle"></i>Actualizar
+      </button>
+    </form>
+     <span style="color:#fff">{{ PostDataResponse }}</span>
+	   <div class="modal-footer">
+			<button type="button" class="btn btn-danger close-btn-c" ng-click="CloseModal('update2')">Cerrar</button>
+	   </div>
+  </div>
+</div>
+<!-- End Modal 2 Update Player-->
+<!-- Modal 3 Update Player-->
+<div id="updateModal3" class="modal-c">
+  <!-- Modal content -->
+  <div class="modal-content-c" style="">
+    <span class="close-c" ng-click="CloseModal('update3')">&times;</span>
+	<h4 class="modal-title">Actualización de datos: </h4>
+    <form class="form-horizontal">
+     <div class="form-group">
+		<label for="inputEmail3" class="col-sm-3 control-label">Número de camiseta</label>
+		<div class="col-sm-9">	
+        <input ng-model="detailCtrl.mail.number" type="number" class="form-control" placeholder="Número de camiseta" value="{{detailCtrl.mail.number}}" required>
+		</div>
+	  </div>
+      <div class="form-group">
+		<label for="inputEmail3" class="col-sm-3 control-label">Posición principal</label>
+		<div class="col-sm-9">	
+        <input ng-model="detailCtrl.mail.position1" type="text" class="form-control" placeholder="Posición principal" value="{{detailCtrl.mail.position1}}" required>
+		</div>
+	  </div>
+      <div class="form-group">
+		<label for="inputEmail3" class="col-sm-3 control-label">Perfil principal</label>
+		<div class="col-sm-9">	
+        <input ng-model="detailCtrl.mail.perfil1" type="text" class="form-control" placeholder="Perfil principal" value="{{detailCtrl.mail.perfil1}}" required>
+		</div>
+	  </div>
+      <div class="form-group">
+		<label for="inputEmail3" class="col-sm-3 control-label">Posición secundaria</label>
+		<div class="col-sm-9">	
+        <input ng-model="detailCtrl.mail.position2" type="text" class="form-control" placeholder="Posición secundaria" value="{{detailCtrl.mail.position2}}" required>
+		</div>
+	  </div>
+      <div class="form-group">
+		<label for="inputEmail3" class="col-sm-3 control-label">Perfil secundario</label>
+		<div class="col-sm-9">	
+        <input ng-model="detailCtrl.mail.perfil2" type="text" class="form-control" placeholder="Perfil secundario" value="{{detailCtrl.mail.perfil2}}" required>
+		</div>
+	  </div> 
+      <button type="button" class="btn btn-primary btn-with-icon save-profile" data-toggle="modal" ng-click="UpdateDataPlayer(detailCtrl.mail)">
+        <i class="ion-android-checkmark-circle"></i>Actualizar
+      </button>
+    </form>
+     <span style="color:#fff">{{ PostDataResponse }}</span>
+	   <div class="modal-footer">
+			<button type="button" class="btn btn-danger close-btn-c" ng-click="CloseModal('update3')">Cerrar</button>
+	   </div>
+  </div>
+</div>
+<!-- End Modal 3 Update Player-->
+<!-- Modal 4 Update Player-->
+<div id="updateModal4" class="modal-c">
+  <!-- Modal content -->
+  <div class="modal-content-c" style="">
+    <span class="close-c" ng-click="CloseModal('update4')">&times;</span>
+	<h4 class="modal-title">Actualización de datos: </h4>
+    <form class="form-horizontal">
+     <div class="form-group">
+		<label for="inputEmail3" class="col-sm-3 control-label">Último equipo</label>
+		<div class="col-sm-9">	
+        <input ng-model="detailCtrl.mail.lastteam" type="text" class="form-control" placeholder="Último equipo" value="{{detailCtrl.mail.lastteam}}" required>
+		</div>
+	  </div>
+      <div class="form-group">
+		<label for="inputEmail3" class="col-sm-3 control-label">Agente</label>
+		<div class="col-sm-9">	
+        <input ng-model="detailCtrl.mail.agent" type="text" class="form-control" placeholder="Agente" value="{{detailCtrl.mail.agent}}" required>
+		</div>
+	  </div>
+      <div class="form-group">	
+		<label for="inputEmail3" class="col-sm-3 control-label">Fichaje:</label>
+		<div class="col-sm-9">	
+			<p class="input-group">
+			 <input type="text" class="form-control" uib-datepicker-popup="{{format}}" datepicker-options="options" ng-model="detailCtrl.mail.signin" value="{{detailCtrl.mail.signin | date : 'yyyy/MM/dd'}}" is-open="opened" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" />
+			  <span class="input-group-btn">
+				<button type="button" class="btn btn-default" ng-click="open()"><i class="glyphicon glyphicon-calendar"></i></button>
+			  </span>
+			</p>			
+		</div>
+	  </div>
+      <!--<div class="form-group">
+		<label for="inputEmail3" class="col-sm-3 control-label">Expiración de contrato:</label>
+		<div class="col-sm-9">	
+			<p class="input-group">
+			 <input type="text" class="form-control" uib-datepicker-popup="{{format}}" datepicker-options="options" ng-model="detailCtrl.mail.expiration" value="{{detailCtrl.mail.expiration | date : 'yyyy/MM/dd'}}" is-open="opened" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" />
+			  <span class="input-group-btn">
+				<button type="button" class="btn btn-default" ng-click="open()"><i class="glyphicon glyphicon-calendar"></i></button>
+			  </span>
+			</p>	
+		</div>	
+	  </div>-->	  
+      <button type="button" class="btn btn-primary btn-with-icon save-profile" data-toggle="modal" ng-click="UpdateDataPlayer(detailCtrl.mail)">
+        <i class="ion-android-checkmark-circle"></i>Actualizar
+      </button>
+    </form>
+     <span style="color:#fff">{{ PostDataResponse }}</span>
+	   <div class="modal-footer">
+			<button type="button" class="btn btn-danger close-btn-c" ng-click="CloseModal('update4')">Cerrar</button>
+	   </div>
+  </div>
+</div>
+<!-- End Modal 4 Update Player-->
+<!-- Modal 5 Create event-->
+<div id="updateModal5" class="modal-c">
+  <!-- Modal content -->
+  <div class="modal-content-c" style="">
+    <span class="close-c" ng-click="CloseModal('update5')">&times;</span>
+	<h4 class="modal-title">Nuevo evento: </h4>
+    <form class="form-horizontal">
+      <div class="form-group">	
+		<label for="inputEmail3" class="col-sm-3 control-label">Fecha:</label>
+		<div class="col-sm-9">	
+			<p class="input-group">
+			 <input type="text" class="form-control" uib-datepicker-popup="{{format}}" datepicker-options="options" ng-model="detailCtrl.training.date" is-open="opened" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" />
+			  <span class="input-group-btn">
+				<button type="button" class="btn btn-default" ng-click="open()"><i class="glyphicon glyphicon-calendar"></i></button>
+			  </span>
+			</p>			
+		</div>
+	  </div>
+	  <div class="form-group">	
+		<label for="inputEmail3" class="col-sm-3 control-label">Datos:</label>
+		<div class="col-sm-9">	
+			<input type="file" ng-file-select="onFileSelect($files)" >
+		   <i ng-hide="file_nmea" style="color:#fff;">Ningún archivo cargado</i>
+		   <div style="color:#fff;">{{file_nmea_advert}}</div>
+		   <b style="color:#fff;">Progress:</b>
+		   <progress value="{{progress}}"></progress>			
+		</div>
+	  </div>
+      <button type="button" class="btn btn-primary btn-with-icon save-profile" data-toggle="modal" ng-click="CreateTraining(detailCtrl.training)">
+        <i class="ion-android-checkmark-circle"></i>Crear
+      </button>
+    </form>
+     <span style="color:#fff">{{PostDataResponseEvent}}</span>
+	   <div class="modal-footer">
+			<button type="button" class="btn btn-danger close-btn-c" ng-click="CloseModal('update5')">Cerrar</button>
+	   </div>
+  </div>
+</div>
+<!-- End Modal 5 Create event-->
+<!--  <h1>My App in real time</h1>
+  <div id="messages"></div>
+  <br/>
+  <form>
+    <input type="text" id="username" placeholder="Tu Nombre" >
+    <input type="text" id="texto" placeholder="Cuéntanos algo...">
+    <input type="button" value="Enviar!" onclick="getResults()">
+  </form>-->
+  <input type="button" value="Enviar!" onclick="getResultsById('111')">
+<script>
+//openSocket_Node();
+//Recalcular la posicion de los puntos  del mapa de movimiento
+var datosRes=[];
+//console.log(datosRes);
+$(window).resize(function() {
+  //resize just happened, pixels changed
+  var w = window.innerWidth;
+  var h = window.innerHeight;
+  //console.log('REs: ', w,h);
+  //console.log(datosRes);
+  resizePoints(datosRes);
+});
+</script>
+

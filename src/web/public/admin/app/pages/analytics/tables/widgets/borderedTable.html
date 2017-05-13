@@ -1,0 +1,34 @@
+<div class="horizontal-scroll">
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+	  <th class="browser-icons"></th>
+      <th class="browser-icons"></th>
+      <th class="align-right">Jugador</th>
+      <th class="align-right">Caminar (m)</th>
+      <th class="align-right">Trotar</th>
+      <th class="align-right">Correr</th>
+	  <th class="align-right">Sprints</th>
+	  <th class="align-right">Velocidad<br>Máx</th>
+	  <th class="align-right">Distancia<br>Relativa</th>
+	  <th class="align-right">Número de<br>sprints</th>
+	  <th class="align-right">HMLD</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in metricsTableData track by $index">
+	  <td style="background:{{colors_id[$index]}}"><div></div></td>
+      <td>{{item.number}}</td>
+      <td class="align-right">{{item.name}} {{item.lastname}}</td>
+      <td class="align-right">{{item.results.results.speed_results.distancia_caminar}}</td>
+      <td class="align-right">{{item.results.results.speed_results.distancia_trotar}}</td>
+      <td class="align-right">{{item.results.results.speed_results.distancia_correr}}</td>
+	  <td class="align-right">{{item.results.results.speed_results.distancia_sprints}}</td>
+      <td class="align-right">{{item.results.results.speed_results.max_speed}}</td>
+      <td class="align-right">{{item.results.results.speed_results.distancia_relativa}}</td>
+      <td class="align-right">{{item.results.results.speed_results.num_sprints}}</td>
+	  <td class="align-right">{{item.results.results.speed_results.HMLD}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

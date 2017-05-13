@@ -1,0 +1,23 @@
+<div class="horizontal-scroll">
+  <table class="table table-condensed">
+    <thead>
+    <tr>
+      <th class="table-id">#</th>
+      <th>Jugador</th>
+      <th>Posición</th>
+      <th>Perfil</th>
+      <th>Agregar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in peopleTableData" ng-init="indxFirst = $index">
+      <td class="table-id">{{item.number}}</td>
+      <td>{{item.name}} {{item.lastname}}</td>
+      <td>{{item.position1}}</td>
+	  <td>{{item.perfil1}}</td>
+      <td><button class="status-button btn btn-xs btn-success" ng-click="createGraphs(item,indxFirst)">+</button></td>
+	  <!--<td>{{item}}</td>-->
+    </tr>
+    </tbody>
+  </table>
+</div>
